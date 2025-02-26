@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/02/25 14:31:18 by eieong           ###   ########.fr       */
+/*   Updated: 2025/02/26 17:48:34 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "libft/get_next_line_bonus.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -23,6 +24,12 @@
 # include <string.h>
 # include <errno.h>
 # include <mlx.h>
+
+typedef enum e_bool
+{
+	false,
+	true
+}			t_bool;
 
 typedef struct s_game
 {
