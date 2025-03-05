@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/02/26 17:48:32 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:23:50 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 		perror("Wrong number of arguments");
 		return (1);
 	}
+	game = malloc(sizeof(t_game));
 	ft_memset(game, 0, sizeof(t_game));
 	check_filename(argv[1]);
 	game->fd = open(argv[1], O_RDONLY);
@@ -46,5 +47,6 @@ int	main(int argc, char **argv)
 	}
 	/*check_map.c*/
 	get_map(game);
+	/*valid path in map*/
 	/*mlx init*/
 }

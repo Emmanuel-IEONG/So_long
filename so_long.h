@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/02/26 17:48:34 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:23:51 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef enum e_bool
 	true
 }			t_bool;
 
+typedef struct s_pos
+{
+	int		x;
+	int		y;
+}			t_pos;
+
 typedef struct s_game
 {
 	char	**map;
@@ -38,13 +44,15 @@ typedef struct s_game
 	int		fd;
 	int		width;
 	int		height;
-	int		x_pos;
-	int		y_pos;
+	// int		x_pos;
+	// int		y_pos;
+	t_pos	pos;
 	int		collectibles_left;
 	int		move_count;
 	int		c_count;
 	int		e_count;
 	int		p_count;
+	int		c_floodfill;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
