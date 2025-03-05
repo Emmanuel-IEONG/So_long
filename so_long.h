@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/04 15:23:51 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/05 14:25:10 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "libft/get_next_line_bonus.h"
+# include "libft/ft_printf.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -52,7 +53,7 @@ typedef struct s_game
 	int		c_count;
 	int		e_count;
 	int		p_count;
-	int		c_floodfill;
+	// int		c_floodfill;
 
 	void	*mlx_ptr;
 	void	*win_ptr;

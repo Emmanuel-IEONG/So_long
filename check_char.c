@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/05 11:56:13 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/05 16:03:21 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ ft_fill */
 
 void	flood_fill(char **map, t_pos pos, t_game *game)
 {
-	if (map[pos.x][pos.y] == '1' || pos.x < 0 || pos.y < 0
+	if (map[pos.y][pos.x] == '1' || pos.y < 0 || pos.x < 0
 			|| pos.x > game->width || pos.y > game->height)
 		return ;
-	if (map[pos.x][pos.y] == 'C')
+	if (map[pos.y][pos.x] == 'C')
 		game->c_count--;
-	if (map[pos.x][pos.y] == 'E')
+	if (map[pos.y][pos.x] == 'E')
 		game->e_count--;
-	map[pos.x][pos.y] = '1';
-	flood_fill(map, (t_pos){pos.x, pos.y - 1}, game);
-	flood_fill(map, (t_pos){pos.x, pos.y + 1}, game);
-	flood_fill(map, (t_pos){pos.x + 1, pos.y}, game);
+	map[pos.y][pos.x] = '1';
 	flood_fill(map, (t_pos){pos.x - 1, pos.y}, game);
+	flood_fill(map, (t_pos){pos.x + 1, pos.y}, game);
+	flood_fill(map, (t_pos){pos.x, pos.y + 1}, game);
+	flood_fill(map, (t_pos){pos.x, pos.y - 1}, game);
 }
 
 char	**dup_map(t_game *game)
@@ -53,7 +53,7 @@ char	**dup_map(t_game *game)
 	return (mapcopy);
 }
 
-void	char_count(t_game *game, int x, int y)
+t_bool	char_count(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == 'C')
 		game->c_count++;
@@ -66,31 +66,38 @@ void	char_count(t_game *game, int x, int y)
 		game->pos.y = y;
 	}
 	else if (game->map[y][x] != '0' && game->map[y][x] != '1')
-		perror("Unauthorized char");
+		return (ft_printf("Unauthorized char"), false);
+	return (true);
 }
 
-void	check_char(t_game *game)
+t_bool	check_char(t_game *game)
 {
-	int	x;
-	int	y;
+	t_bool	char_valid;
+	int		x;
+	int		y;
 
+	char_valid = true;
 	y = 0;
 	while (y < game->height)
 	{
 		x = 0;
 		while (x < game->width)
 		{
-			char_count(game, x, y);
+			if (!char_count(game, x, y))
+				return (false);
 			x++;
 		}
 		y++;
 	}
+	if (game->c_count < 1 || game->e_count != 1 || game->p_count != 1)
+		char_valid = false;
 	if (game->c_count < 1)
-		perror("At least 1 collectible needed");
+		ft_printf("At least 1 collectible needed\n");
 	if (game->e_count != 1)
-		perror("Wrong number of exit");
+		ft_printf("Wrong number of exit\n");
 	if (game->p_count != 1)
-		perror("Wrong number of player");
+		ft_printf("Wrong number of player\n");
+	return (char_valid);
 }
 
 t_bool	is_map_valid(t_game *game)
@@ -99,12 +106,12 @@ t_bool	is_map_valid(t_game *game)
 	int		temp_c_count;
 	int		temp_e_count;
 
-	check_char(game);
+	if (!check_char(game))
+		return (false);
 	mapcopy = dup_map(game);
 	temp_c_count = game->c_count;
 	temp_e_count = game->e_count;
 	flood_fill(mapcopy, (t_pos){game->pos.x, game->pos.y}, game);
-	/*check C, E, P = 0*/
 	if (game->c_count != 0 || game->e_count != 0)
 		return (false);
 	game->c_count = temp_c_count;
