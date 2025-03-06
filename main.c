@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/05 15:35:30 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/06 12:33:14 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!check_walls(game, 0, 0))
 		return (1);
-	/*valid path in map*/
 	if (!is_map_valid(game))
 		return (1);
 	/*mlx init*/

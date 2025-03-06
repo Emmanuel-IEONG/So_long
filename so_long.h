@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/05 14:25:10 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/06 12:33:12 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ typedef struct s_game
 
 	void	*mlx_ptr;
 	void	*win_ptr;
+}			t_game;
 
+typedef struct s_texture
+{
 	void	*collectibles;
 	void	*exit;
 	void	*floor;
 	void	*player;
-	void	*wall_0;
-	void	*wall_1;
-}			t_game;
+	void	*wall;
+}			t_texture;
 
 #endif

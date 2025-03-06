@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:57:26 by eieong            #+#    #+#             */
-/*   Updated: 2024/11/21 15:17:35 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/06 12:47:44 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+void	ft_freetab(char **tab);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
