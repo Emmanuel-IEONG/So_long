@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/06 12:33:12 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:48:30 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <string.h>
 # include <errno.h>
 # include <mlx.h>
+
+# define TILE_SIZE 64
 
 typedef enum e_bool
 {
@@ -45,27 +47,31 @@ typedef struct s_game
 	int		fd;
 	int		width;
 	int		height;
-	// int		x_pos;
-	// int		y_pos;
 	t_pos	pos;
 	int		collectibles_left;
 	int		move_count;
 	int		c_count;
 	int		e_count;
 	int		p_count;
-	// int		c_floodfill;
+	t_xpm	xpm;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
 }			t_game;
 
-typedef struct s_texture
+// typedef struct s_data
+// {
+// 	void	*mlx_ptr;
+// 	void	*win_ptr;
+// }			t_data;
+
+typedef struct s_xpm
 {
 	void	*collectibles;
 	void	*exit;
 	void	*floor;
 	void	*player;
 	void	*wall;
-}			t_texture;
+}			t_xpm;
 
 #endif
