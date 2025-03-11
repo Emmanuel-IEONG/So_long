@@ -6,7 +6,7 @@
 #    By: eieong <eieong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/06 14:48:54 by eieong            #+#    #+#              #
-#    Updated: 2025/01/14 11:32:13 by eieong           ###   ########.fr        #
+#    Updated: 2025/03/11 10:55:58 by eieong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_LIBFT := ft_isalpha.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
+		ft_freetab.c \
 
 SRC_LIBFT_BONUS := ft_lstnew_bonus.c \
 				ft_lstadd_front_bonus.c \
@@ -77,23 +78,23 @@ OBJ := $(SRCS_LIBFT:.c=.o) $(SRC_GNL:.c=.o) $(SRC_FTPRINTF:.c=.o)
 OBJBONUS := $(ALLSRCS_LIBFT:.c=.o)
 
 $(NAME): $(OBJ)
-	ar rcs $@ $^
+	@ar rcs $@ $^
 
 all:	$(NAME)
 
 clean:
-	$(RM) $(OBJ)
-	$(RM) $(OBJBONUS)
+	@$(RM) $(OBJ)
+	@$(RM) $(OBJBONUS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:	fclean all
 
 bonus: $(OBJBONUS)
-	ar rcs $(NAME) $(OBJBONUS)
+	@ar rcs $(NAME) $(OBJBONUS)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 .PHONY: all clean fclean re bonus

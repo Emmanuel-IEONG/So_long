@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/07 11:48:30 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 10:53:20 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
-# include <mlx.h>
+// # include <mlx.h>
 
 # define TILE_SIZE 64
 
@@ -53,25 +53,33 @@ typedef struct s_game
 	int		c_count;
 	int		e_count;
 	int		p_count;
-	t_xpm	xpm;
+	// t_xpm	xpm;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
 }			t_game;
 
-// typedef struct s_data
-// {
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// }			t_data;
-
-typedef struct s_xpm
+/*typedef struct s_xpm
 {
 	void	*collectibles;
 	void	*exit;
 	void	*floor;
 	void	*player;
 	void	*wall;
-}			t_xpm;
+}			t_xpm;*/
+
+
+t_bool	get_map(t_game *game);
+void	line_to_map(t_game *game, char *line);
+t_bool	check_walls(t_game *game, int x, int y);
+t_bool	check_filename(char *name);
+
+t_bool	is_map_valid(t_game *game);
+t_bool	check_char(t_game *game);
+t_bool	char_count(t_game *game, int x, int y);
+char	**dup_map(t_game *game);
+void	flood_fill(char **map, t_pos pos, t_game *game);
+
+void	clean_game(t_game *game);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/07 11:48:28 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 10:52:20 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	mlx_launch(t_game *game)
+/*void	mlx_launch(t_game *game)
 {
 	xpm_to_image(game);
 	image_to_window(game);
@@ -32,22 +32,8 @@ t_bool	init_game(t_game *game)
 		return (false);
 	}
 	return (true);
-}
+}*/
 
-t_bool	check_filename(char *name)
-{
-	if (ft_strlen(name) < 5)
-	{
-		ft_printf("Invalid file name\n");
-		return (false);
-	}
-	name = name + (ft_strlen(name) - 4);
-	if (ft_strncmp(name, ".ber", 4))
-	{
-		ft_printf("Wrong file extension\n");
-		return (false);
-	}
-}
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -67,7 +53,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!is_map_valid(game))
 		return (1);
-	if (!init_game(game))
-		return (1);
-	mlx_launch(game);
+	// if (!init_game(game))
+	// 	return (1);
+	// mlx_launch(game);
 }

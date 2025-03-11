@@ -6,17 +6,17 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:20:31 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/05 15:59:47 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 10:54:36 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*map rectangular = OK*/
-	/*Same width everywhere = OK*/
-	/*First and last line == '1' = OK*/
-/*check walls around map* = OK/
-	/*check sides -> [0] & [width] = OK*/
+/*map rectangular = OK
+	Same width everywhere = OK
+	First and last line == '1' = OK
+check walls around map* = OK
+	check sides -> [0] & [width] = OK*/
 
 t_bool	check_walls(t_game *game, int x, int y)
 {
@@ -53,6 +53,7 @@ void	line_to_map(t_game *game, char *line)
 	free(temp);
 	game->height++;
 }
+
 t_bool	get_map(t_game *game)
 {
 	char	*line;
@@ -82,33 +83,18 @@ t_bool	get_map(t_game *game)
 	return (free(line), true);
 }
 
-// void	get_map(t_game *game)
-// {
-// 	char	*line;
-// 	int		line_len;
-
-// 	line_len = 0;
-// 	line = get_next_line(game->fd);
-// 	if (!line)
-// 		perror("Map empty");
-// 	line_len = ft_strlen(line);
-// 	if (line[line_len - 1] == '\n')
-// 		game->width = line_len - 1;
-// 	else
-// 		perror("Invalid map");
-// 	line_to_map(game, line);
-// 	if (!check_walls(game, game->height - 1))
-// 		perror("Map is not surrounded by walls");
-// 	while (1)
-// 	{
-// 		line = get_next_line(game->fd);
-// 		if (!line)
-// 			break ;
-// 		line_to_map(game, line);
-// 		if (!check_walls(game, game->height - 1))
-// 			perror("Map is not surrounded by walls");
-// 	}
-// 	game->map[game->height] = NULL;
-// 	if (!check_walls(game, game->height))
-// 		perror("Map is not surrounded by walls");
-// }
+t_bool	check_filename(char *name)
+{
+	if (ft_strlen(name) < 5)
+	{
+		ft_printf("Invalid file name\n");
+		return (false);
+	}
+	name = name + (ft_strlen(name) - 4);
+	if (ft_strncmp(name, ".ber", 4))
+	{
+		ft_printf("Wrong file extension\n");
+		return (false);
+	}
+	return (true);
+}
