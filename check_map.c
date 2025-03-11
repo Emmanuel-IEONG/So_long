@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:20:31 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 10:54:36 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:55:02 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,60 @@ check walls around map* = OK
 
 t_bool	check_walls(t_game *game, int x, int y)
 {
-	while (y <= game->height)
+	while (y < game->height)
 	{
 		x = 0;
-		if (game->map[y][game->width])
-			return (ft_printf("Map must be a rectangle"), false);
-		if (y == 0 || y == game->height)
+		// if (game->map[y][game->width] != '\n' && game->map[y][game->width])
+		// 	return (ft_printf("Map must be a rectangle"), false);
+		if (y == 0 || y == (game->height - 1))
 		{
-			while (game->map[y][x])
+			while (game->map[y][x] && game->map[y][x] != '\n')
 			{
 				if (game->map[y][x] != '1')
-					return (false);
+					return (ft_printf("1: Map must be surrouded by walls\n"), ft_printf("y = %d, x = %d\n", y, x), false);
 				x++;
 			}
+			if (x != game->width)
+				return (ft_printf("width = %d\n", game->width), ft_printf("1: Map must be a rectangle\n"), false);
 		}
 		else
 		{
-			if (game->map[y][0] != '1' || game->map[y][game->width - 1] != '1')
-				return (false);
+			while (game->map[y][x])
+				x++;
+			if ((x - 1) != game->width)
+				return (ft_printf("2: Map must be a rectangle\n"), false);
+			if (game->map[y][0] != '1' || game->map[y][x - 2] != '1')
+				return (ft_printf("2: Map must be surrouded by walls\n"), ft_printf("game->map[y][0] = %c, game->map[y][game->width - 1] = %c, game->map[y][x - 2] = %c\n",game->map[y][0], game->map[y][game->width - 1], game->map[y][x-2]), false);
+			ft_printf("x = %d\n", x);
 		}
 		y++;
 	}
 	return (true);
 }
 
-void	line_to_map(t_game *game, char *line)
+t_bool	line_to_map(t_game *game, char *line)
 {
-	char	*temp;
+	char	**temp;
+	int		i;
 
-	temp = ft_substr(line, 0, ft_strlen(line) - 1);
-	game->map[game->height] = temp;
-	free(temp);
-	game->height++;
+	i = 0;
+	temp = malloc(sizeof(char *) * (game->height + 1));
+	if (!temp)
+	{
+		perror("malloc failed");
+		return (false);
+	}
+	temp[game->height] = NULL;
+	while (i < game->height - 1)
+	{
+		temp[i] = game->map[i];
+		i++;
+	}
+	temp[i] = line;
+	if (game->map)
+		free(game->map);
+	game->map = temp;
+	return (true);
 }
 
 t_bool	get_map(t_game *game)
@@ -62,24 +84,30 @@ t_bool	get_map(t_game *game)
 	line_len = 0;
 	line = get_next_line(game->fd);
 	if (!line)
-		return (ft_printf("Map empty"), false);
+		return (ft_printf("Map empty\n"), false);
+	game->height++;
 	line_len = ft_strlen(line);
 	if (line[line_len - 1] == '\n')
 		game->width = line_len - 1;
 	else
 	{
 		free(line);
-		return (ft_printf("Invalid map"), false);
+		return (ft_printf("Invalid map\n"), false);
 	}
-	line_to_map(game, line);
+	if (!line_to_map(game, line))
+		return (free(line), false);
 	while (1)
-	{
+	{	
 		line = get_next_line(game->fd);
 		if (!line)
+		{
+			ft_printf("\nBREAK\n");
 			break ;
-		line_to_map(game, line);
+		}
+		game->height++;
+		if (!line_to_map(game, line))
+			return (free(line), false);
 	}
-	game->map[game->height] = NULL;
 	return (free(line), true);
 }
 

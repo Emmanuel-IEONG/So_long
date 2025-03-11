@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 10:52:20 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:11:36 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ t_bool	init_game(t_game *game)
 	return (true);
 }*/
 
+void	ft_print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("\n");
+	while (tab[i])
+	{
+		ft_printf("%s", tab[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -48,12 +62,17 @@ int	main(int argc, char **argv)
 	if (game->fd < 0)
 		return (ft_printf("Invalid file\n"), 1);
 	if (!get_map(game))
-		return (1);
+		return (clean_game(game), 1);
+	ft_printf("PRINT MAP :\n");
+	ft_print_tab(game->map);
 	if (!check_walls(game, 0, 0))
-		return (1);
+		return (clean_game(game), 1);
+	ft_printf("\nMAP VALID ?\n");
 	if (!is_map_valid(game))
-		return (1);
+		return (clean_game(game), 1);
 	// if (!init_game(game))
 	// 	return (1);
 	// mlx_launch(game);
+	clean_game(game);
+	return (0);
 }

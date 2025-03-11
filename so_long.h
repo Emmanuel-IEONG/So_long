@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 10:53:20 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:05:36 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_game
 
 
 t_bool	get_map(t_game *game);
-void	line_to_map(t_game *game, char *line);
+t_bool	line_to_map(t_game *game, char *line);
 t_bool	check_walls(t_game *game, int x, int y);
 t_bool	check_filename(char *name);
 
@@ -81,5 +81,7 @@ char	**dup_map(t_game *game);
 void	flood_fill(char **map, t_pos pos, t_game *game);
 
 void	clean_game(t_game *game);
+
+void	ft_print_tab(char **tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 10:50:40 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:09:56 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	flood_fill(char **map, t_pos pos, t_game *game)
 	if (map[pos.y][pos.x] == 'C')
 		game->c_count--;
 	if (map[pos.y][pos.x] == 'E')
+	{
 		game->e_count--;
+		map[pos.y][pos.x] = '1';
+		return ;
+	}
 	map[pos.y][pos.x] = '1';
 	flood_fill(map, (t_pos){pos.x - 1, pos.y}, game);
 	flood_fill(map, (t_pos){pos.x + 1, pos.y}, game);
@@ -81,7 +85,7 @@ t_bool	check_char(t_game *game)
 	while (y < game->height)
 	{
 		x = 0;
-		while (x < game->width)
+		while (x < game->width - 1)
 		{
 			if (!char_count(game, x, y))
 				return (false);
@@ -91,6 +95,7 @@ t_bool	check_char(t_game *game)
 	}
 	if (game->c_count < 1 || game->e_count != 1 || game->p_count != 1)
 		char_valid = false;
+	ft_printf("\nc = %d, e = %d, p = %d\n", game->c_count, game->e_count, game->p_count);
 	if (game->c_count < 1)
 		ft_printf("At least 1 collectible needed\n");
 	if (game->e_count != 1)
@@ -106,15 +111,20 @@ t_bool	is_map_valid(t_game *game)
 	int		temp_c_count;
 	int		temp_e_count;
 
+	ft_printf("check char\n");
 	if (!check_char(game))
 		return (false);
 	mapcopy = dup_map(game);
+	if (!mapcopy)
+		return (perror("malloc failed"), false);
 	temp_c_count = game->c_count;
 	temp_e_count = game->e_count;
+	ft_printf("flood fill\n");
 	flood_fill(mapcopy, (t_pos){game->pos.x, game->pos.y}, game);
+	ft_print_tab(mapcopy);
 	if (game->c_count != 0 || game->e_count != 0)
-		return (false);
+		return (ft_printf("Can't reach C or E\n"), ft_freetab(mapcopy), false);
 	game->c_count = temp_c_count;
 	game->e_count = temp_e_count;
-	return (true);
+	return (ft_freetab(mapcopy), true);
 }
