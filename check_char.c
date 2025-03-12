@@ -6,18 +6,11 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 15:09:56 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:37:56 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*only 1E, 1P and mini 1C (&'1'/'0') and nothing else = OK*/
-
-/*E accessible from P ? flood fill algo*/
-/*C accessible from P ?*/
-/*flood fill algo : recursive
-ft_fill */
 
 void	flood_fill(char **map, t_pos pos, t_game *game)
 {
@@ -76,33 +69,28 @@ t_bool	char_count(t_game *game, int x, int y)
 
 t_bool	check_char(t_game *game)
 {
-	t_bool	char_valid;
 	int		x;
 	int		y;
 
-	char_valid = true;
-	y = 0;
-	while (y < game->height)
+	y = -1;
+	while (++y < game->height)
 	{
-		x = 0;
-		while (x < game->width - 1)
+		x = -1;
+		while (++x < game->width - 1)
 		{
 			if (!char_count(game, x, y))
 				return (false);
-			x++;
 		}
-		y++;
 	}
-	if (game->c_count < 1 || game->e_count != 1 || game->p_count != 1)
-		char_valid = false;
-	ft_printf("\nc = %d, e = %d, p = %d\n", game->c_count, game->e_count, game->p_count);
 	if (game->c_count < 1)
 		ft_printf("At least 1 collectible needed\n");
 	if (game->e_count != 1)
 		ft_printf("Wrong number of exit\n");
 	if (game->p_count != 1)
 		ft_printf("Wrong number of player\n");
-	return (char_valid);
+	if (game->c_count < 1 || game->e_count != 1 || game->p_count != 1)
+		return (false);
+	return (true);
 }
 
 t_bool	is_map_valid(t_game *game)
@@ -111,7 +99,6 @@ t_bool	is_map_valid(t_game *game)
 	int		temp_c_count;
 	int		temp_e_count;
 
-	ft_printf("check char\n");
 	if (!check_char(game))
 		return (false);
 	mapcopy = dup_map(game);
@@ -119,7 +106,6 @@ t_bool	is_map_valid(t_game *game)
 		return (perror("malloc failed"), false);
 	temp_c_count = game->c_count;
 	temp_e_count = game->e_count;
-	ft_printf("flood fill\n");
 	flood_fill(mapcopy, (t_pos){game->pos.x, game->pos.y}, game);
 	ft_print_tab(mapcopy);
 	if (game->c_count != 0 || game->e_count != 0)

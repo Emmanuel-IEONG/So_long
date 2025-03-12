@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 15:05:36 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/12 13:50:49 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
-// # include <mlx.h>
+// # include "mlx/mlx.h"
 
 # define TILE_SIZE 64
 

@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/11 15:11:36 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:33:19 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,11 @@ int	main(int argc, char **argv)
 	ft_memset(game, 0, sizeof(t_game));
 	game->fd = open(argv[1], O_RDONLY);
 	if (game->fd < 0)
-		return (ft_printf("Invalid file\n"), 1);
+		return (ft_printf("Invalid file\n"), clean_game(game), 1);
 	if (!get_map(game))
 		return (clean_game(game), 1);
-	ft_printf("PRINT MAP :\n");
 	ft_print_tab(game->map);
-	if (!check_walls(game, 0, 0))
+	if (!check_walls(game, 0, -1))
 		return (clean_game(game), 1);
 	ft_printf("\nMAP VALID ?\n");
 	if (!is_map_valid(game))

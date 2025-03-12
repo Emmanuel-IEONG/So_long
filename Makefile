@@ -6,7 +6,7 @@
 #    By: eieong <eieong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/29 13:03:43 by eieong            #+#    #+#              #
-#    Updated: 2025/03/11 10:58:30 by eieong           ###   ########.fr        #
+#    Updated: 2025/03/12 14:31:36 by eieong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ OBJ := $(SRC:.c=.o)
 $(NAME):
 	@echo "$(GREEN)----Compiling lib----"
 	@make all -C libft
-	@$(CC) $(CFLAGS) $(SRC) $(LIBFT) -o $@
+	@make all -C mlx
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(INCLUDES) $(SRC) $(LIBFT) -o $@
 	@echo "\n$(LGREEN)So_long Compiled!\n"
 
 all: $(NAME)
@@ -47,6 +48,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make fclean -C libft
+	@make clean -C mlx
 	@echo "\n$(LPURPLE)ALL CLEANED!\n"
 
 re: fclean all
