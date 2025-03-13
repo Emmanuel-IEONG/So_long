@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/12 13:50:49 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:32:31 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "libft/get_next_line_bonus.h"
 # include "libft/ft_printf.h"
+# include "mlx/mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -24,7 +25,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
-// # include "mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define TILE_SIZE 64
 
@@ -40,6 +42,15 @@ typedef struct s_pos
 	int		y;
 }			t_pos;
 
+typedef struct s_xpm
+{
+	void	*collectibles;
+	void	*exit;
+	void	*floor;
+	void	*player;
+	void	*wall;
+}			t_xpm;
+
 typedef struct s_game
 {
 	char	**map;
@@ -53,21 +64,11 @@ typedef struct s_game
 	int		c_count;
 	int		e_count;
 	int		p_count;
-	// t_xpm	xpm;
+	t_xpm	xpm;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
 }			t_game;
-
-/*typedef struct s_xpm
-{
-	void	*collectibles;
-	void	*exit;
-	void	*floor;
-	void	*player;
-	void	*wall;
-}			t_xpm;*/
-
 
 t_bool	get_map(t_game *game);
 t_bool	line_to_map(t_game *game, char *line);
@@ -80,7 +81,18 @@ t_bool	char_count(t_game *game, int x, int y);
 char	**dup_map(t_game *game);
 void	flood_fill(char **map, t_pos pos, t_game *game);
 
-void	clean_game(t_game *game);
+void	put_img_to_window(t_game *game, int x, int y);
+void	img_to_window(t_game *game);
+void	xpm_to_image(t_game *game);
+
+void	go_up(t_game *game);
+void	go_down(t_game *game);
+void	go_left(t_game *game);
+void	go_right(t_game *game);
+t_bool	can_move(t_game *game, int x, int y);
+
+int		clean_game(t_game *game);
+void	err_msg(int err);
 
 void	ft_print_tab(char **tab);
 

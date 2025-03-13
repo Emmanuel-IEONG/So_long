@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/12 16:37:56 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:32:15 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,8 @@ t_bool	is_map_valid(t_game *game)
 	temp_c_count = game->c_count;
 	temp_e_count = game->e_count;
 	flood_fill(mapcopy, (t_pos){game->pos.x, game->pos.y}, game);
-	ft_print_tab(mapcopy);
 	if (game->c_count != 0 || game->e_count != 0)
-		return (ft_printf("Can't reach C or E\n"), ft_freetab(mapcopy), false);
+		return (err_msg(8), ft_freetab(mapcopy), false);
 	game->c_count = temp_c_count;
 	game->e_count = temp_e_count;
 	return (ft_freetab(mapcopy), true);

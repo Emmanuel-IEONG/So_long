@@ -6,7 +6,7 @@
 #    By: eieong <eieong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/06 14:48:54 by eieong            #+#    #+#              #
-#    Updated: 2025/03/12 16:48:32 by eieong           ###   ########.fr        #
+#    Updated: 2025/03/13 15:26:00 by eieong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRC_LIBFT := ft_isalpha.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_freetab.c \
-		ft_print_tab.c \
 
 SRC_LIBFT_BONUS := ft_lstnew_bonus.c \
 				ft_lstadd_front_bonus.c \

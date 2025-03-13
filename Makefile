@@ -6,7 +6,7 @@
 #    By: eieong <eieong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/29 13:03:43 by eieong            #+#    #+#              #
-#    Updated: 2025/03/12 14:31:36 by eieong           ###   ########.fr        #
+#    Updated: 2025/03/13 15:36:20 by eieong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM := rm -rf
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -g
 MLXFLAGS := -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-INCLUDES := -I/usr/include -Imlx
+INCLUDES := -I/usr/include -I mlx
 
 GREEN		:= \033[0;32m
 LGREEN		:= \033[1;32m
@@ -28,15 +28,20 @@ SRC :=	main.c \
 		check_map.c \
 		check_char.c \
 		cleanup.c \
+		image.c \
+		moves.c \
 
 OBJ := $(SRC:.c=.o)
 
-$(NAME):
+$(NAME): $(OBJ)
 	@echo "$(GREEN)----Compiling lib----"
 	@make all -C libft
 	@make all -C mlx
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(INCLUDES) $(SRC) $(LIBFT) -o $@
+	@$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $@
 	@echo "\n$(LGREEN)So_long Compiled!\n"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
 

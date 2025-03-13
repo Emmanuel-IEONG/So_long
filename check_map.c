@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:20:31 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/12 16:34:36 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:32:17 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ t_bool	check_walls(t_game *game, int x, int y)
 			while (game->map[y][x] && game->map[y][x] != '\n')
 			{
 				if (game->map[y][x] != '1')
-					return (ft_printf("Map must be surrouded by walls\n"), false);
+					return (err_msg(6), false);
 				x++;
 			}
 			if (x != game->width)
-				return (ft_printf("Map must be a rectangle\n"), false);
+				return (err_msg(7), false);
 		}
 		else
 		{
 			while (game->map[y][x])
 				x++;
 			if ((x - 1) != game->width)
-				return (ft_printf("Map must be a rectangle\n"), false);
+				return (err_msg(7), false);
 			if (game->map[y][0] != '1' || game->map[y][x - 2] != '1')
-				return (ft_printf("Map must be surrouded by walls\n"), false);
+				return (err_msg(6), false);
 		}
 	}
 	return (true);
@@ -49,7 +49,7 @@ t_bool	line_to_map(t_game *game, char *line)
 	i = 0;
 	temp = malloc(sizeof(char *) * (game->height + 1));
 	if (!temp)
-		return (perror ("malloc failed"), false);
+		return (perror ("Error"), false);
 	temp[game->height] = NULL;
 	while (i < game->height - 1)
 	{
@@ -71,13 +71,13 @@ t_bool	get_map(t_game *game)
 	line_len = 0;
 	line = get_next_line(game->fd);
 	if (!line)
-		return (ft_printf("Map empty\n"), false);
+		return (err_msg(4), false);
 	game->height++;
 	line_len = ft_strlen(line);
 	if (line[line_len - 1] == '\n')
 		game->width = line_len - 1;
 	else
-		return (free(line), ft_printf("Invalid map\n"), false);
+		return (free(line), err_msg(5), false);
 	while (line)
 	{	
 		if (!line_to_map(game, line))
@@ -93,13 +93,13 @@ t_bool	check_filename(char *name)
 {
 	if (ft_strlen(name) < 5)
 	{
-		ft_printf("Invalid file name\n");
+		err_msg(2);
 		return (false);
 	}
 	name = name + (ft_strlen(name) - 4);
 	if (ft_strncmp(name, ".ber", 4))
 	{
-		ft_printf("Wrong file extension\n");
+		err_msg(3);
 		return (false);
 	}
 	return (true);
