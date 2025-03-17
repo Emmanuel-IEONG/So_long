@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:00:55 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:32 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:36:13 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ t_bool	can_move(t_game *game, int x, int y)
 	if (game->map[y][x] == 'E')
 	{
 		if (game->collectibles_left != 0)
+		{
+			ft_printf("You need to collect %d more thing(s) to exit.\n",
+				game->collectibles_left);
 			return (false);
+		}
 		game->move_count++;
 		ft_printf("\nGG, you won with %d moves!\n", game->move_count);
 		clean_game(game);

@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:15 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:40:16 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_bool	char_count(t_game *game, int x, int y)
 		game->pos.y = y;
 	}
 	else if (game->map[y][x] != '0' && game->map[y][x] != '1')
-		return (ft_printf("Unauthorized char"), false);
+		return (ft_printf("Error\nUnauthorized char\n"), false);
 	return (true);
 }
 
@@ -83,11 +83,11 @@ t_bool	check_char(t_game *game)
 		}
 	}
 	if (game->c_count < 1)
-		ft_printf("At least 1 collectible needed\n");
+		ft_printf("Error\nAt least 1 collectible needed\n");
 	if (game->e_count != 1)
-		ft_printf("Wrong number of exit\n");
+		ft_printf("Error\nWrong number of exit\n");
 	if (game->p_count != 1)
-		ft_printf("Wrong number of player\n");
+		ft_printf("Error\nWrong number of player\n");
 	if (game->c_count < 1 || game->e_count != 1 || game->p_count != 1)
 		return (false);
 	return (true);

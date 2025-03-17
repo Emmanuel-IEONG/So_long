@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:31 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:30:42 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	flood_fill(char **map, t_pos pos, t_game *game);
 void	put_img_to_window(t_game *game, int x, int y);
 void	img_to_window(t_game *game);
 void	xpm_to_image(t_game *game);
+void	moves_to_window(t_game *game);
 
 void	go_up(t_game *game);
 void	go_down(t_game *game);

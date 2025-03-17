@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:20:31 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:17 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:52:54 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ t_bool	check_walls(t_game *game, int x, int y)
 			if (game->map[y][0] != '1' || game->map[y][x - 2] != '1')
 				return (err_msg(6), false);
 		}
+	}
+	return (true);
+}
+t_bool	check_map_size(t_game *game)
+{
+	if (game->width > 30 || game->height > 16)
+	{
+		ft_printf("Error\nMap is too big.\n");
+		return (false);
 	}
 	return (true);
 }
@@ -86,6 +95,8 @@ t_bool	get_map(t_game *game)
 		game->height++;
 	}
 	game->height--;
+	if (!check_map_size(game))
+		return (free(line), false);
 	return (free(line), true);
 }
 

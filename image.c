@@ -6,11 +6,21 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:31:49 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:24 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:29:36 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	moves_to_window(t_game *game)
+{
+	char	*str;
+
+	str = ft_itoa(game->move_count);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 5, 10, 16777215, "Moves : ");
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 55, 10, 16777215, str);
+	free(str);
+}
 
 void	put_img_to_window(t_game *game, int x, int y)
 {
@@ -55,7 +65,7 @@ void	img_to_window(t_game *game)
 		}
 		y++;
 	}
-	// display_move_count(game);
+	moves_to_window(game);
 }
 
 void	xpm_to_image(t_game *game)
@@ -64,15 +74,15 @@ void	xpm_to_image(t_game *game)
 	int	height;
 
 	game->xpm.collectibles = mlx_xpm_file_to_image(game->mlx_ptr,
-			"ikea/collectibles.xpm", &width, &height);
+			"img/collectibles.xpm", &width, &height);
 	game->xpm.exit = mlx_xpm_file_to_image(game->mlx_ptr,
-			"ikea/exit.xpm", &width, &height);
+			"img/exit.xpm", &width, &height);
 	game->xpm.floor = mlx_xpm_file_to_image(game->mlx_ptr,
-			"ikea/floor.xpm", &width, &height);
+			"img/floor.xpm", &width, &height);
 	game->xpm.player = mlx_xpm_file_to_image(game->mlx_ptr,
-			"ikea/player.xpm", &width, &height);
+			"img/player.xpm", &width, &height);
 	game->xpm.wall = mlx_xpm_file_to_image(game->mlx_ptr,
-			"ikea/wall_0.xpm", &width, &height);
+			"img/wall.xpm", &width, &height);
 	if (!game->xpm.collectibles || !game->xpm.exit || !game->xpm.floor
 		|| !game->xpm.player || !game->xpm.wall)
 		err_msg(9);
