@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:20:31 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/17 12:52:54 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:13:16 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_bool	check_walls(t_game *game, int x, int y)
 {
@@ -40,6 +40,7 @@ t_bool	check_walls(t_game *game, int x, int y)
 	}
 	return (true);
 }
+
 t_bool	check_map_size(t_game *game)
 {
 	if (game->width > 30 || game->height > 16)

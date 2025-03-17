@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:30 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/17 12:30:42 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:09 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
-# include "libft/libft.h"
-# include "libft/get_next_line_bonus.h"
-# include "libft/ft_printf.h"
-# include "mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../libft/get_next_line_bonus.h"
+# include "../libft/ft_printf.h"
+# include "../mlx/mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -49,6 +49,7 @@ typedef struct s_xpm
 	void	*floor;
 	void	*player;
 	void	*wall;
+	void	*monster;
 }			t_xpm;
 
 typedef struct s_game
@@ -74,6 +75,7 @@ t_bool	get_map(t_game *game);
 t_bool	line_to_map(t_game *game, char *line);
 t_bool	check_walls(t_game *game, int x, int y);
 t_bool	check_filename(char *name);
+t_bool	check_map_size(t_game *game);
 
 t_bool	is_map_valid(t_game *game);
 t_bool	check_char(t_game *game);
@@ -93,8 +95,8 @@ void	go_right(t_game *game);
 t_bool	can_move(t_game *game, int x, int y);
 
 int		clean_game(t_game *game);
+void	win_or_lose(t_game *game, t_bool win);
+void	destroy_images(t_game *game);
 void	err_msg(int err);
-
-void	ft_print_tab(char **tab);
 
 #endif

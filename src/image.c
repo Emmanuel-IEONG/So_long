@@ -6,21 +6,11 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:31:49 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/17 12:29:36 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:12:57 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	moves_to_window(t_game *game)
-{
-	char	*str;
-
-	str = ft_itoa(game->move_count);
-	mlx_string_put(game->mlx_ptr, game->win_ptr, 5, 10, 16777215, "Moves : ");
-	mlx_string_put(game->mlx_ptr, game->win_ptr, 55, 10, 16777215, str);
-	free(str);
-}
 
 void	put_img_to_window(t_game *game, int x, int y)
 {
@@ -65,7 +55,6 @@ void	img_to_window(t_game *game)
 		}
 		y++;
 	}
-	moves_to_window(game);
 }
 
 void	xpm_to_image(t_game *game)
