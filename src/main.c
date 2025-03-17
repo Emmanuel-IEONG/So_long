@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:21:45 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/13 15:32:25 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:47:22 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	mlx_launch(t_game *game)
 {
 	xpm_to_image(game);
 	img_to_window(game);
-	mlx_key_hook(game->win_ptr, key_pressed, game);
+	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, key_pressed, game);
 	mlx_hook(game->win_ptr, 17, StructureNotifyMask, clean_game, game);
 	mlx_loop(game->mlx_ptr);
 }
