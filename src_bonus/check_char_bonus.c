@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:03:06 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/17 15:01:38 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/19 11:32:20 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	**dup_map(t_game *game)
 	while (i < game->height)
 	{
 		mapcopy[i] = ft_strdup(game->map[i]);
+		if (!mapcopy[i])
+			return (NULL);
 		i++;
 	}
 	mapcopy[i] = NULL;
