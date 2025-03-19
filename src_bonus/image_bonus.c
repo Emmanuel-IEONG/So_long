@@ -6,7 +6,7 @@
 /*   By: eieong <eieong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:31:49 by eieong            #+#    #+#             */
-/*   Updated: 2025/03/17 16:11:28 by eieong           ###   ########.fr       */
+/*   Updated: 2025/03/19 12:14:42 by eieong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ void	xpm_to_image(t_game *game)
 			"img/monster.xpm", &width, &height);
 	if (!game->xpm.collectibles || !game->xpm.exit || !game->xpm.floor
 		|| !game->xpm.player || !game->xpm.wall || !game->xpm.monster)
+	{
 		err_msg(9);
+		clean_game(game);
+	}
 }
